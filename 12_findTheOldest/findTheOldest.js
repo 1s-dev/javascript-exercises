@@ -2,20 +2,25 @@ const findTheOldest = function (people) {
   let age = "";
   const array = [];
   for (let i = 0; i < people.length; i++) {
-    age = people[i].yearOfDeath - people[i].yearOfBirth;
-    const obj = { name: people[i].name, age: age };
-    array.push(obj);
+    if (typeof people[i].yearOfDeath == "undefined") {
+      const currentYear = new Date().getFullYear();
+      age = currentYear - people[i].yearOfBirth;
+      const obj = { name: people[i].name, age: age };
+      array.push(obj);
+    } else {
+      age = people[i].yearOfDeath - people[i].yearOfBirth;
+      const obj = { name: people[i].name, age: age };
+      array.push(obj);
+    }
   }
+
   array.sort(function (a, b) {
     return b.age - a.age;
   });
-  console.log(array[0]);
   return array[0];
 };
 
 /*
-
-
 let age = "";
 const array = [];
 for (let i = 0; i < arrayObj.length; i++) {
